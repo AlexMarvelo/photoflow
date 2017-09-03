@@ -1,4 +1,6 @@
-export default {
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
@@ -6,6 +8,6 @@ export default {
     height: '100%',
   },
   loader: {
-    alignSelf: 'middle',
+    alignSelf: 'center',
   }
-};
+});

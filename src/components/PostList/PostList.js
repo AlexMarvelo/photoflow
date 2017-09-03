@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../Button/Button';
+import { View, Text, Image, Button, FlatList } from 'react-native';
 import { apiHost } from '../../config/api.json';
 import request from '../../utils/http';
 import styles from './PostList.styles';
@@ -48,25 +48,27 @@ class PostList extends Component {
 
   render() {
     return (
-      <div style={styles.container}>
-        <ul style={styles.list}>
-          {this.state.posts.map(post => post.type === 'image' && (
-            <li style={styles.post} key={post.id}>
-              <img
-                src={post.images.standard_resolution.url}
-                width={post.images.standard_resolution.width}
-                height={post.images.standard_resolution.height}
-                alt={post.id}
+      <View style={styles.container}>
+        <FlatList
+          data={this.state.posts}
+          renderItem={(post => post.type === 'image' && (
+            <View style={styles.post} key={post.id}>
+              <Image
+                source={{ uri: post.images.standard_resolution.url}}
+                style={{
+                  width: post.images.standard_resolution.width,
+                  height: post.images.standard_resolution.height,
+                }}
               />
-            </li>
+            </View>
           ))}
-        </ul>
+        />
         {this.state.loading ? (
-          <span style={styles.loader}>Loading...</span>
+          <Text style={styles.loader}>Loading...</Text>
         ) : (
-          <Button onClick={this.loadPosts} style={styles.button} text="Load posts" />
+          <Button onPress={this.loadPosts} style={styles.button} text="Load posts" />
         )}
-      </div>
+      </View>
     );
   }
 }

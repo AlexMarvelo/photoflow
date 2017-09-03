@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Text, View } from 'react-native';
 import config from './config/api.json';
 import AuthorizedApp from './components/AuthorizedApp/AuthorizedApp';
 import PersistentStorege from './utils/PersistentStorage';
@@ -14,7 +15,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.auth();
+    // this.auth();
   }
 
   auth() {
@@ -43,13 +44,13 @@ class App extends Component {
 
   render() {
     return (
-      <div style={styles.container}>
+      <View style={styles.container}>
         {this.state.accessToken ? (
           <AuthorizedApp accessToken={this.state.accessToken} />
         ) : (
-          <span style={styles.loader}>Authentication...</span>
+          <Text style={styles.loader}>Authentication...</Text>
         )}
-      </div>
+      </View>
     );
   }
 }
