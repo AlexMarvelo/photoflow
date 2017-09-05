@@ -40,7 +40,7 @@ class App extends Component {
     const redirectURI = 'http://heyalex.xyz';
     const responseType = 'token';
     return (
-      <View style={styles.statusBarContainer}>
+      <View style={styles.container}>
         <WebView
           source={{uri: `https://api.instagram.com/oauth/authorize/?client_id=${clientId}&redirect_uri=${redirectURI}&response_type=${responseType}`}}
           onNavigationStateChange={this.onNavigationStateChange}
