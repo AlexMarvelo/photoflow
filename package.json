@@ -22,6 +22,9 @@
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
     "test:mob": "node node_modules/jest/bin/jest.js --watch",
+    "install:dev": "react-native run-android",
+    "install:prod": "cd android && ./gradlew clean && ./gradlew installRelease",
+    "build:prod": "cd android && ./gradlew clean && ./gradlew assembleRelease",
     "lint": "eslint ./"
   },
   "jest": {
