@@ -18,6 +18,7 @@ class PostList extends Component {
       count: 6,
     };
     this.loadPosts = this.loadPosts.bind(this);
+    this.measureView = this.measureView.bind(this);
   }
   
   loadPosts() {
@@ -36,37 +37,40 @@ class PostList extends Component {
           nextUrl: data.pagination.next_url,
           loading: false,
         }));
-      })
-      .catch(err => {
-        this.setState(state => ({
-          ...state,
-          loading: false,
-        }));
-        throw err;
+        // console.log(this.state.posts);
       });
+  }
+  
+  measureView(event) {
+    this.setState(state => ({
+      ...state,
+      viewWidth: event.layout.width,
+    }));
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container} onLayout={e => this.measureView(e.nativeEvent)}>
         <FlatList
           data={this.state.posts}
-          renderItem={(post => post.type === 'image' && (
-            <View style={styles.post} key={post.id}>
+          style={styles.list}
+          keyExtractor={post => post.id}
+          renderItem={({ item }) => (
+            <View style={styles.post}>
               <Image
-                source={{ uri: post.images.standard_resolution.url}}
+                source={{ uri: item.images.standard_resolution.url }}
                 style={{
-                  width: post.images.standard_resolution.width,
-                  height: post.images.standard_resolution.height,
+                  width: this.state.viewWidth,
+                  height: this.state.viewWidth,
                 }}
               />
             </View>
-          ))}
+          )}
         />
         {this.state.loading ? (
           <Text style={styles.loader}>Loading...</Text>
         ) : (
-          <Button onPress={this.loadPosts} style={styles.button} text="Load posts" />
+          <Button onPress={this.loadPosts} style={styles.button} title="Load posts" />
         )}
       </View>
     );

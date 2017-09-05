@@ -2,17 +2,17 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   container: {
-    width: 640,
-    margin: '0 auto',
+    width: '100%',
+    padding: 15,
   },
   list: {
     display: 'flex',
     flexDirection: 'column',
     padding: 0,
     margin: 0,
-    // listStyle: 'none',
   },
   post: {
+    width: '100%',
     marginBottom: 15,
   },
   button: {
@@ -20,20 +20,17 @@ export default StyleSheet.create({
     height: 40,
     lineHeight: 40,
     backgroundColor: '#7ad4f7',
-    fontFamily: 'helvetica,sans-serif',
     fontSize: 15,
     borderWidth: 0,
     padding: 0,
     margin: 0,
-    // cursor: 'pointer',
-    // outline: 'none',
   },
   loader: {
     display: 'flex',
+    textAlign: 'center',
     width: '100%',
     height: 40,
-    lineHeight: 40,
-    fontFamily: 'helvetica,sans-serif',
+    lineHeight: 25,
     fontSize: 15,
   }
 });

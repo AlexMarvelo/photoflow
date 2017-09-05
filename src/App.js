@@ -1,55 +1,50 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View, WebView } from 'react-native';
 import config from './config/api.json';
 import AuthorizedApp from './components/AuthorizedApp/AuthorizedApp';
-import PersistentStorege from './utils/PersistentStorage';
 import styles from './App.styles';
 
-
-const storage = new PersistentStorege();
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    this.onNavigationStateChange = this.onNavigationStateChange.bind(this);
   }
-
-  componentWillMount() {
-    // this.auth();
-  }
-
-  auth() {
-    let accessToken = storage.get('accessToken');
-    if (!accessToken) {
-      const locationHash = window.location.hash;
-      const match = locationHash.match(/^#access_token=(.*)/);
-      accessToken = match && match[1];
-      if (accessToken) {
-        storage.save('accessToken', accessToken);
-      }
-    }
+  
+  onNavigationStateChange(navEvent) {
+    const url = navEvent.url;
+    const match = url.match(/\/#access_token=(.*)$/);
+    const accessToken = match && match[1];
     if (accessToken) {
       this.setState(state => ({
         ...state,
         accessToken,
       }));
-      window.location.hash = '';
-    } else {
-      const clientId = config.clientId;
-      const redirectURI = 'http://localhost:3000';
-      const responseType = 'token';
-      window.location.replace(`https://api.instagram.com/oauth/authorize/?client_id=${clientId}&redirect_uri=${redirectURI}&response_type=${responseType}`);
+      // console.log('Signed in!');
     }
   }
 
   render() {
+    if (this.state.accessToken) {
+      return (
+        <View style={styles.statusBarContainer}>
+          <View style={styles.container}>
+            <AuthorizedApp accessToken={this.state.accessToken} />
+          </View>
+        </View>
+      );
+    }
+
+    const clientId = config.clientId;
+    const redirectURI = 'http://heyalex.xyz';
+    const responseType = 'token';
     return (
-      <View style={styles.container}>
-        {this.state.accessToken ? (
-          <AuthorizedApp accessToken={this.state.accessToken} />
-        ) : (
-          <Text style={styles.loader}>Authentication...</Text>
-        )}
+      <View style={styles.statusBarContainer}>
+        <WebView
+          source={{uri: `https://api.instagram.com/oauth/authorize/?client_id=${clientId}&redirect_uri=${redirectURI}&response_type=${responseType}`}}
+          onNavigationStateChange={this.onNavigationStateChange}
+        />
       </View>
     );
   }
