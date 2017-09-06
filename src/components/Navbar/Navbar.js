@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { View, Text, Image } from 'react-native';
 // import Button from '../Button/Button';
 import { apiHost } from '../../config/api.json';
 import request from '../../utils/http';
@@ -43,10 +44,10 @@ class Navbar extends Component {
 
   render() {
     return (
-      <div style={styles.container}>
-        <span style={styles.title}>{this.state.user.username}</span>
-        <img src={this.state.user.profile_picture} alt={this.state.user.full_name} style={styles.avatar} />
-      </div>
+      <View style={styles.container}>
+        <Text style={styles.title}>{this.state.user.username}</Text>
+        <Image source={{ uri: this.state.user.profile_picture}} alt={this.state.user.full_name} style={styles.avatar} />
+      </View>
     );
   }
 }

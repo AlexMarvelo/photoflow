@@ -1,21 +1,24 @@
-const styles = {
+import { StyleSheet } from 'react-native';
+
+export default StyleSheet.create({
   container: {
     display: 'flex',
-    width: 640,
+    flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: '0 10px',
-    boxSizing: 'border-box',
-    margin: '0 auto 10px',
+    paddingHorizontal: 15,
+    paddingVertical: 5,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    borderBottomWidth: 1,
   },
   title: {
-    
   },
   avatar: {
-    borderRadius: '50%',
+    borderRadius: 15,
     width: 30,
     height: 30,
   }
-};
-
-export default styles;
+});

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../Button/Button';
+import { View, Text, Image, Button, FlatList } from 'react-native';
 import { apiHost } from '../../config/api.json';
 import request from '../../utils/http';
 import styles from './PostList.styles';
@@ -18,6 +18,7 @@ class PostList extends Component {
       count: 6,
     };
     this.loadPosts = this.loadPosts.bind(this);
+    this.measureView = this.measureView.bind(this);
   }
   
   loadPosts() {
@@ -36,37 +37,42 @@ class PostList extends Component {
           nextUrl: data.pagination.next_url,
           loading: false,
         }));
-      })
-      .catch(err => {
-        this.setState(state => ({
-          ...state,
-          loading: false,
-        }));
-        throw err;
+        // console.log(this.state.posts);
       });
+  }
+  
+  measureView(event) {
+    this.setState(state => ({
+      ...state,
+      viewWidth: event.layout.width,
+    }));
   }
 
   render() {
     return (
-      <div style={styles.container}>
-        <ul style={styles.list}>
-          {this.state.posts.map(post => post.type === 'image' && (
-            <li style={styles.post} key={post.id}>
-              <img
-                src={post.images.standard_resolution.url}
-                width={post.images.standard_resolution.width}
-                height={post.images.standard_resolution.height}
-                alt={post.id}
+      <View style={styles.container} onLayout={e => this.measureView(e.nativeEvent)}>
+        <FlatList
+          data={this.state.posts}
+          style={styles.list}
+          keyExtractor={post => post.id}
+          renderItem={({ item }) => (
+            <View style={styles.post}>
+              <Image
+                source={{ uri: item.images.standard_resolution.url }}
+                style={{
+                  width: this.state.viewWidth,
+                  height: this.state.viewWidth,
+                }}
               />
-            </li>
-          ))}
-        </ul>
+            </View>
+          )}
+        />
         {this.state.loading ? (
-          <span style={styles.loader}>Loading...</span>
+          <Text style={styles.loader}>Loading...</Text>
         ) : (
-          <Button onClick={this.loadPosts} style={styles.button} text="Load posts" />
+          <Button onPress={this.loadPosts} style={styles.button} title="Load posts" />
         )}
-      </div>
+      </View>
     );
   }
 }

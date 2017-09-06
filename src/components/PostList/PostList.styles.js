@@ -1,44 +1,36 @@
-export const Constants = {
-  POST_WIDTH: 640,
-};
+import { StyleSheet } from 'react-native';
 
-const styles = {
+export default StyleSheet.create({
   container: {
-    width: Constants.POST_WIDTH,
-    margin: '0 auto',
+    width: '100%',
+    padding: 15,
   },
   list: {
     display: 'flex',
     flexDirection: 'column',
     padding: 0,
     margin: 0,
-    listStyle: 'none',
   },
   post: {
+    width: '100%',
     marginBottom: 15,
   },
   button: {
     width: '100%',
     height: 40,
-    lineheight: 40,
-    background: '#7ad4f7',
-    fontFamily: 'helvetica,sans-serif',
+    lineHeight: 40,
+    backgroundColor: '#7ad4f7',
     fontSize: 15,
-    border: 'none',
+    borderWidth: 0,
     padding: 0,
     margin: 0,
-    cursor: 'pointer',
-    outline: 'none',
   },
   loader: {
-    display: 'inline-block',
+    display: 'flex',
+    textAlign: 'center',
     width: '100%',
     height: 40,
-    lineHeight: '40px',
-    fontFamily: 'helvetica,sans-serif',
+    lineHeight: 25,
     fontSize: 15,
-    background: 'none',
   }
-};
-
-export default styles;
+});

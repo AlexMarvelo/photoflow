@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { View, ScrollView } from 'react-native';
 import Navbar from '../Navbar/Navbar';
 import PostList from '../PostList/PostList';
 import styles from './AuthorizedApp.styles';
 
 
 const AuthorizedApp = ({ accessToken }) => (
-  <div style={styles.container}>
+  <View style={styles.container}>
     <Navbar accessToken={accessToken} />
-    <PostList accessToken={accessToken} />
-  </div>
+    <ScrollView style={styles.listContainer}>
+      <PostList accessToken={accessToken} />
+    </ScrollView>
+  </View>
 );
 
 const { string } = PropTypes;
