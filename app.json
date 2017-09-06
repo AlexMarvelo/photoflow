@@ -1,4 +1,7 @@
 {
   "name": "photoflow",
-  "displayName": "photoflow"
+  "displayName": "photoflow",
+  "expo": {
+    "sdkVersion": "20.0.0"
+  }
 }
