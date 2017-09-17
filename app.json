@@ -1,7 +1,13 @@
 {
   "name": "photoflow",
-  "displayName": "photoflow",
   "expo": {
-    "sdkVersion": "20.0.0"
+    "name": "photoflow",
+    "slug": "photoflow",
+    "description": "Demo app to list your instagram photos",
+    "version": "1.0.1",
+    "sdkVersion": "20.0.0",
+    "orientation": "portrait",
+    "icon": "./icon.png",
+    "androidStatusBarColor": "#000000",
   }
 }
