@@ -1,7 +1,7 @@
 {
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 86101,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://9p-fjq.alexmarvelo.photoflow.exp.direct",
   "packagerNgrokUrl": "https://packager.9p-fjq.alexmarvelo.photoflow.exp.direct",
   "ngrokPid": 86121
